@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
+/** @noinspection LambdaBodyCanBeCodeBlock*/
 public class Jpa {
 
+  /** @noinspection Convert2MethodRef*/
   public static void main(String[] args) throws SQLException {
     // JPA Java Persistence API - набор правил (соглашений) по реализации доменной модели
     // Entity
@@ -46,6 +48,7 @@ public class Jpa {
 
     try (Session session = sessionFactory.openSession()) {
       // jql java query language
+      // select id, name from users where id >= 1
       List<User> users = session.createQuery("select u from User u where id >= 1 order by id desc", User.class)
         .getResultList();
 
