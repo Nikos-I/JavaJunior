@@ -21,7 +21,8 @@ package ru.gb.lesson4.hw;
 public class Homework {
 
     public static void main(String[] args) {
-        Db.workWithBooks();
+        Db.CreateDb();
+        Jdbc.workWithBooks();
         Jpa.jpaWithBooks();
     }
 
