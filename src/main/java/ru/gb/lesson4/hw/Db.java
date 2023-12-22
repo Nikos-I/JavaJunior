@@ -17,11 +17,19 @@ public class Db {
             statement.execute("CREATE SCHEMA hw4;");
             statement.execute("USE hw4;");
 // * 1.1 Создать таблицу book с колонками id bigint, name varchar, author varchar, ...
+            statement.execute("DROP TABLE IF EXISTS authors;");
+            String execString = "CREATE TABLE authors(id BIGINT NOT NULL AUTO_INCREMENT, authorname VARCHAR(45) NOT NULL, PRIMARY KEY (id))";
+            statement.execute(execString);
+
             statement.execute("DROP TABLE IF EXISTS books;");
-            statement.execute("CREATE TABLE books(id bigint NOT NULL , name varchar(50) NOT NULL , author varchar(50), PRIMARY KEY (id));");
+            execString = "CREATE TABLE books(id bigint NOT NULL, name varchar(50) NOT NULL,author varchar(50) DEFAULT NULL,authorId bigint DEFAULT NULL, "+
+                    "PRIMARY KEY (id), CONSTRAINT authorFK FOREIGN KEY (authorId) REFERENCES authors(id))";
+            statement.execute(execString);
+
+
 // * 1.2 Добавить в таблицу 10 книг
             String execStr;
-            for (int i=0; i < COUNT_BOOKS; i++) {
+            for (int i=1; i <= COUNT_BOOKS; i++) {
                 execStr = String.format("INSERT books(id, name, author) VALUES (%d, 'Книга_%d', 'Автор_%d')", i, i, i);
                 statement.execute(execStr);
             }
